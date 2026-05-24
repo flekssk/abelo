@@ -1,0 +1,17 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "type": "project",
+    "description": "abelo test application",
+    "license": "MIT",
+    "require": {
+        "php": "^8.4",
+        "ext-pdo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
