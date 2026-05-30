@@ -5,11 +5,21 @@ declare(strict_types=1);
 namespace App\Pages\Index;
 
 use App\Application\CQRS\Action;
+use App\Application\View\Facades\ViewFactoryFacade;
+use Symfony\Component\HttpFoundation\Response;
 
 class IndexPageAction extends Action
 {
-    public function asController()
+    public function asController(): Response
     {
-        echo 111;
+        return new Response(
+            ViewFactoryFacade::buildView(
+                'templates/main.tpl',
+                [
+                    'content_tpl' => 'file:main.tpl',
+                    'page_title' => 'Test',
+                ]
+            )
+        );
     }
 }

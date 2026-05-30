@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a0464ea43e801b20bddeed3522067914",
+    "content-hash": "3372705e7d011d11744ce0b1698a42fa",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -586,6 +586,82 @@
                 }
             ],
             "time": "2026-02-28T14:55:02+00:00"
+        },
+        {
+            "name": "smarty/smarty",
+            "version": "v5.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smarty-php/smarty.git",
+                "reference": "78d259d3b971c59a0cd719c270cc5cbb740c36a7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/78d259d3b971c59a0cd719c270cc5cbb740c36a7",
+                "reference": "78d259d3b971c59a0cd719c270cc5cbb740c36a7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0",
+                "symfony/polyfill-mbstring": "^1.27"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5 || ^7.5",
+                "smarty/smarty-lexer": "^4.0.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Smarty\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Monte Ohrt",
+                    "email": "monte@ohrt.com"
+                },
+                {
+                    "name": "Uwe Tews",
+                    "email": "uwe.tews@googlemail.com"
+                },
+                {
+                    "name": "Rodney Rehm",
+                    "email": "rodney.rehm@medialize.de"
+                },
+                {
+                    "name": "Simon Wisselink",
+                    "homepage": "https://www.iwink.nl/"
+                }
+            ],
+            "description": "Smarty - the compiling PHP template engine",
+            "homepage": "https://smarty-php.github.io/smarty/",
+            "keywords": [
+                "templating"
+            ],
+            "support": {
+                "forum": "https://github.com/smarty-php/smarty/discussions",
+                "issues": "https://github.com/smarty-php/smarty/issues",
+                "source": "https://github.com/smarty-php/smarty/tree/v5.8.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/wisskid",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-02-15T14:27:15+00:00"
         },
         {
             "name": "spiral/core",
@@ -1831,6 +1907,87 @@
             "time": "2026-03-06T13:17:50+00:00"
         },
         {
+            "name": "symfony/http-foundation",
+            "version": "v8.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-foundation.git",
+                "reference": "af11474600f06718086c2cda4fa6fa8d0a672e7e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/af11474600f06718086c2cda4fa6fa8d0a672e7e",
+                "reference": "af11474600f06718086c2cda4fa6fa8d0a672e7e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.4.1",
+                "symfony/deprecation-contracts": "^2.5|^3",
+                "symfony/polyfill-mbstring": "^1.1"
+            },
+            "conflict": {
+                "doctrine/dbal": "<4.3"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^4.3",
+                "predis/predis": "^1.1|^2.0",
+                "symfony/cache": "^7.4|^8.0",
+                "symfony/clock": "^7.4|^8.0",
+                "symfony/dependency-injection": "^7.4|^8.0",
+                "symfony/expression-language": "^7.4|^8.0",
+                "symfony/http-kernel": "^7.4|^8.0",
+                "symfony/mime": "^7.4|^8.0",
+                "symfony/rate-limiter": "^7.4|^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\HttpFoundation\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Defines an object-oriented layer for the HTTP specification",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/http-foundation/tree/v8.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-05-29T05:06:50+00:00"
+        },
+        {
             "name": "symfony/polyfill-ctype",
             "version": "v1.37.0",
             "source": {
@@ -2324,6 +2481,93 @@
                 }
             ],
             "time": "2026-05-26T02:25:22+00:00"
+        },
+        {
+            "name": "symfony/psr-http-message-bridge",
+            "version": "v8.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/psr-http-message-bridge.git",
+                "reference": "67fd34de15ded1763aa1e330fe345f080a94022c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/psr-http-message-bridge/zipball/67fd34de15ded1763aa1e330fe345f080a94022c",
+                "reference": "67fd34de15ded1763aa1e330fe345f080a94022c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.4.1",
+                "psr/http-message": "^1.0|^2.0",
+                "symfony/http-foundation": "^7.4|^8.0"
+            },
+            "conflict": {
+                "php-http/discovery": "<1.15"
+            },
+            "require-dev": {
+                "nyholm/psr7": "^1.1",
+                "php-http/discovery": "^1.15",
+                "psr/log": "^1.1.4|^2|^3",
+                "symfony/browser-kit": "^7.4|^8.0",
+                "symfony/config": "^7.4|^8.0",
+                "symfony/event-dispatcher": "^7.4|^8.0",
+                "symfony/framework-bundle": "^7.4|^8.0",
+                "symfony/http-kernel": "^7.4|^8.0",
+                "symfony/runtime": "^7.4|^8.0"
+            },
+            "type": "symfony-bridge",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Bridge\\PsrHttpMessage\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "PSR HTTP message bridge",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr-17",
+                "psr-7"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/psr-http-message-bridge/tree/v8.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-05-29T05:06:50+00:00"
         },
         {
             "name": "symfony/service-contracts",

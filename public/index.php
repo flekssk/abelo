@@ -19,8 +19,9 @@ use App\Application\Request\Request;
 use Spiral\RoadRunner\Http\PSR7Worker;
 use Spiral\RoadRunner\Worker;
 use Nyholm\Psr7\Factory\Psr17Factory;
+use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
 
-const APP_DIR = __DIR__ . '/../app/';
+const ROOT_DIR = __DIR__ . '/../';
 
 $app = new Application();
 $app->serve();
@@ -29,6 +30,7 @@ $worker = Worker::create();
 
 $psr17Factory = new Psr17Factory();
 $psr7Worker = new PSR7Worker($worker, $psr17Factory, $psr17Factory, $psr17Factory);
+$psrHttpFactory = new PsrHttpFactory($psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory);
 
 while ($request = $psr7Worker->waitRequest()) {
     try {
@@ -44,9 +46,9 @@ while ($request = $psr7Worker->waitRequest()) {
             $request->getUploadedFiles()
         );
 
-        $app->handleRequest($request);
+        $response = $app->handleRequest($request);
 
-        $psr7Worker->respond($psr17Factory->createResponse(200)->withBody($psr17Factory->createStream($uri)));
+        $psr7Worker->respond($psrHttpFactory->createResponse($response));
     } catch (Throwable $e) {
         $errorResponse = ErrorHandler::render($e);
         $psr7Worker->respond($errorResponse);

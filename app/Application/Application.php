@@ -16,7 +16,7 @@ class Application
         $this->container = Container::getInstance();
     }
 
-    public function handleRequest(Request $request): void
+    public function handleRequest(Request $request)
     {
         $this->container->bind(Request::class, $request);
 

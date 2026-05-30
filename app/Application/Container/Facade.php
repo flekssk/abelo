@@ -19,7 +19,7 @@ class Facade
             throw new \BadMethodCallException('No facade instance has been set.');
         }
 
-        return Container::getInstance()->get(Router::class);
+        return Container::getInstance()->get(static::getFacadeAccessor());
     }
 
     public static function __callStatic(string $name, array $arguments): mixed
