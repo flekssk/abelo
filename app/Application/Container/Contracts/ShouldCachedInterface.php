@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Application\Container\Contracts;
 
-interface CacheableInterface
+interface ShouldCachedInterface extends ShouldBuildInterface
 {
-    public function build();
 }

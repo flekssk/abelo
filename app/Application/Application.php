@@ -26,8 +26,15 @@ class Application
 
         $action = $this->container->get($actionJob->actionClass);
 
-        if (method_exists($action, 'asController')) {
-            $action->asController(...$actionJob->parameters);
+        if (!method_exists($action, 'asController')) {
+            throw new \Exception('This action does not have a controller');
         }
+
+        return $action->asController(...$actionJob->params);
+    }
+
+    public function serve(): void
+    {
+        $this->container->build(Router::class);
     }
 }

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Application\Container;
 
+use App\Application\Container\Contracts\ShouldBuildInterface;
+use App\Application\Container\Contracts\ShouldCachedInterface;
+use App\Application\Container\Contracts\ShouldCompiledInterface;
 use Closure;
 use Exception;
 use ReflectionClass;
@@ -46,7 +49,7 @@ class Container
             return new $className();
         }
 
-        $this->bind($className, new $className(...$this->getMethodParameters($constructor)));
+        $this->bind($className, $this->build($className, $this->getMethodParameters($constructor)));
 
         return $this->instances[$className];
     }
@@ -54,6 +57,17 @@ class Container
     public function bind(string $className, object $instance): void
     {
         $this->instances[$className] = $instance;
+    }
+
+    public function build(string $className, $parameters = []): object
+    {
+        $objects = new $className(...$parameters);
+
+        if ($objects instanceof ShouldBuildInterface) {
+            $objects->build();
+        }
+
+        return new $className(...$parameters);
     }
 
     public function buildClassReflection(string $class): ReflectionClass

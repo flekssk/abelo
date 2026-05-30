@@ -37,12 +37,18 @@ services:
         working_dir: /var/www/html
         ports:
             - "${PHP_PORT:-9000}:9000"
+            - "8000:8000"
         volumes:
             - ./:/var/www/html
         networks:
             - common
         extra_hosts:
             - "host.docker.internal:host-gateway"
+        healthcheck:
+            test: [ "CMD-SHELL", "php -v >/dev/null" ]
+            interval: 10s
+            timeout: 3s
+            retries: 5
         depends_on:
             - redis
         environment:
