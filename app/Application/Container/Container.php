@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Application\Container;
 
 use App\Application\Container\Contracts\ShouldBuildInterface;
-use App\Application\Container\Contracts\ShouldCachedInterface;
-use App\Application\Container\Contracts\ShouldCompiledInterface;
 use Closure;
 use Exception;
 use ReflectionClass;

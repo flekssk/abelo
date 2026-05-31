@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace App\Pages\Index;
 
 use App\Application\CQRS\Action;
+use App\Application\Request\Request;
 use App\Application\View\Facades\ViewFactoryFacade;
 use Symfony\Component\HttpFoundation\Response;
 
 class IndexPageAction extends Action
 {
-    public function asController(): Response
+    public function asHtml(Request $request): Response
     {
         return new Response(
             ViewFactoryFacade::buildView(

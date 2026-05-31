@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Application\Router;
 
 use Adbar\Dot;
-use App\Application\Container\Contracts\ShouldCompiledInterface;
+use App\Application\Container\Contracts\ShouldBuildInterface;
 use App\Application\CQRS\Action;
 use App\Application\CQRS\ActionDispatchJob;
 use App\Application\Request\Enums\RequestMethodEnum;
 
-class Router implements ShouldCompiledInterface
+class Router implements ShouldBuildInterface
 {
     private Dot $routes;
 
@@ -72,14 +72,9 @@ class Router implements ShouldCompiledInterface
 
     public function build(): void
     {
-        $files = glob(__DIR__ . '/../../../routes' . '/*.php');
-
-        if ($files !== false) {
-            foreach ($files as $file) {
-                if (is_file($file) && is_readable($file)) {
-                    include_once $file;
-                }
-            }
+        $file = ROOT_DIR . 'routes/api.php';
+        if (is_file($file) && is_readable($file)) {
+            include_once $file;
         }
     }
 }
