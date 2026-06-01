@@ -4,19 +4,16 @@ declare(strict_types=1);
 
 namespace App\Application\Router;
 
-use Adbar\Dot;
 use App\Application\Container\Contracts\ShouldBuildInterface;
 use App\Application\CQRS\Action;
 use App\Application\CQRS\ActionDispatchJob;
 use App\Application\Request\Enums\RequestMethodEnum;
+use Illuminate\Support\Arr;
 
 class Router implements ShouldBuildInterface
 {
-    private Dot $routes;
-
-    public function __construct() {
-        $this->routes = new Dot();
-    }
+    private bool $built = false;
+    private array $routes = [];
 
     public function get(string $uri, string $actionClass): void
     {
@@ -33,8 +30,9 @@ class Router implements ShouldBuildInterface
         if (!is_a($actionClass, Action::class, true)) {
             throw new \InvalidArgumentException('Callable must be an instance of ' . Action::class);
         }
-
-        $this->routes->add(
+        
+        Arr::set(
+            $this->routes,
             str_replace('/', '.', $uri) . '.' . $requestMethod->name,
             $actionClass
         );
@@ -42,18 +40,23 @@ class Router implements ShouldBuildInterface
 
     public function resolveAction(RequestMethodEnum $methodEnum, string $uri): ActionDispatchJob
     {
+        if (!$this->built) {
+            $this->build();
+        }
+
         $actionParams = [];
         $uriParts = explode('/', trim($uri, ' /'));
         $routes = $this->routes;
+        ddump($this->routes);
 
         while(($uriPart = array_shift($uriParts)) !== null) {
-            if ($routes->has($uriPart)) {
+            if (array_key_exists($uriPart, $routes)) {
                 $routes = $routes->get($uriPart);
             } else {
-                foreach (array_keys($routes->all()) as $arrayKey) {
+                foreach ($routes->keys() as $arrayKey) {
                     if (preg_match('/\{([^}]+)\}/', $arrayKey, $matches)) {
                         $routeParameterName = $matches[1];
-                        $routes = $routes->get($routeParameterName);
+                        $routes = $routes[$routeParameterName];
                         $actionParams[$routeParameterName] = $uriPart;
                     }
                 };
@@ -76,5 +79,11 @@ class Router implements ShouldBuildInterface
         if (is_file($file) && is_readable($file)) {
             include_once $file;
         }
+        $file = ROOT_DIR . 'routes/web.php';
+        if (is_file($file) && is_readable($file)) {
+            include_once $file;
+        }
+
+        $this->built = true;
     }
 }

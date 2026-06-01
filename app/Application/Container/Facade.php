@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Application\Container;
 
-use App\Application\Router\Router;
-
 class Facade
 {
     public static function getFacadeAccessor(): ?string

@@ -14,11 +14,13 @@ require __DIR__.'/../bootstrap/helpers.php';
 
 use App\Application\Application;
 use App\Application\Database\DatabaseServiceProvider;
+use App\Application\Router\RouterServiceProvider;
 
 const ROOT_DIR = __DIR__ . '/../';
 
 $app = new Application([
-    DatabaseServiceProvider::class
+    DatabaseServiceProvider::class,
+    RouterServiceProvider::class
 ]);
 
 $app->serve();

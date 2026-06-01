@@ -10,7 +10,7 @@ return new class extends Migration
     public function up(): void
     {
         Db::getConnection()
-            ->exec(
+            ->executeQuery(
                 $sql = "
                     CREATE TABLE IF NOT EXISTS `migrations` (
                         `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -22,6 +22,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Db::getConnection()->exec("DROP TABLE IF EXISTS `migrations`;");
+        Db::getConnection()->executeQuery("DROP TABLE IF EXISTS `migrations`;");
     }
 };

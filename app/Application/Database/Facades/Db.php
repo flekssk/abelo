@@ -6,10 +6,10 @@ namespace App\Application\Database\Facades;
 
 use App\Application\Container\Facade;
 use App\Application\Database\DatabaseConnection;
-use PDO;
+use Doctrine\DBAL\Connection;
 
 /**
- * @method static PDO getConnection()
+ * @method static Connection getConnection()
  */
 class Db extends Facade
 {

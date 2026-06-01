@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace App\Application\Database;
 
-use PDO;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DriverManager;
 use PDOException;
 
 class DatabaseConnection
 {
-    private ?PDO $pdo = null;
+    private ?Connection $connection = null;
 
     public function __construct(
         private readonly string $dsn,
         private readonly string $username,
         private readonly string $password,
-        private readonly array $options = []
     ) {
     }
 
-    public function getConnection(): PDO
+    public function getConnection(): Connection
     {
-        if ($this->pdo === null) {
+        if ($this->connection === null) {
             $this->connect();
         }
 
         try {
-            $this->pdo->query('SELECT 1');
+            $this->connection->executeQuery('SELECT 1');
         } catch (PDOException $e) {
             if ($e->getCode() === 'HY000' || str_contains($e->getMessage(), 'gone away')) {
                 $this->connect();
@@ -35,22 +35,19 @@ class DatabaseConnection
             }
         }
 
-        return $this->pdo;
+        return $this->connection;
     }
 
     private function connect(): void
     {
-        $defaultOptions = [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false,
+        $connectionParams = [
+            'dsn' => $this->dsn,
+            'user' => $this->username,
+            'password' => $this->password,
+            'driver' => 'pdo_mysql',
         ];
 
-        $this->pdo = new PDO(
-            $this->dsn,
-            $this->username,
-            $this->password,
-            $this->options + $defaultOptions
-        );
+        $this->connection = DriverManager::getConnection($connectionParams);
+
     }
 }

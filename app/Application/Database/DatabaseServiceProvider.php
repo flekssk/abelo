@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Application\Database;
 
 use App\Application\Container\Container;
-use App\Application\Container\Contracts\ServiceProviderInterface;
+use App\Application\Container\Contracts\ServiceProvider;
 
-class DatabaseServiceProvider extends ServiceProviderInterface
+class DatabaseServiceProvider extends ServiceProvider
 {
     public function register(Container $container): void
     {

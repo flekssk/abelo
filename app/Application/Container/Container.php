@@ -65,7 +65,7 @@ class Container
             $objects->build();
         }
 
-        return new $className(...$parameters);
+        return $objects;
     }
 
     public function buildClassReflection(string $class): ReflectionClass

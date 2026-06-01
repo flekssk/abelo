@@ -4,16 +4,19 @@ declare(ticks=1);
 
 namespace App\Application\Console;
 
-use Adbar\Dot;
 use App\Application\Container\Contracts\ShouldBuildInterface;
 use App\Application\CQRS\Action;
+use Illuminate\Support\Collection;
 
 class ConsoleRouter implements ShouldBuildInterface
 {
-    private Dot $routes;
+    /**
+     * @var Collection<string, class-string<Action>>
+     */
+    private Collection $routes;
 
     public function __construct() {
-        $this->routes = new Dot();
+        $this->routes = collect();
     }
 
     public function add(string $actionClass): void
@@ -30,7 +33,7 @@ class ConsoleRouter implements ShouldBuildInterface
             throw new \Exception('Action class must use the signature method');
         }
 
-        $this->routes->add($actionClass::$signature, $actionClass);
+        $this->routes[$actionClass::$signature] = $actionClass;
     }
 
     public function resolveAction(string $commandName): ?string

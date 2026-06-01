@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Application;
 
-use App\Application\Console\ConsoleRouter;
 use App\Application\Console\Facades\ConsoleRouterFacade;
 use App\Application\Container\Container;
-use App\Application\Container\Contracts\ServiceProviderInterface;
+use App\Application\Container\Contracts\ServiceProvider;
 use App\Application\Request\Enums\ContentTypeEnum;
 use App\Application\Request\Request;
 use App\Application\Router\Router;
@@ -90,7 +89,6 @@ class Application
     public function runConsole(array $argv): void
     {
         $this->registerProviders();
-        $this->container->build(ConsoleRouter::class);
         $commandName = $argv[1] ?? null;
 
         if ($commandName === null) {
@@ -116,7 +114,7 @@ class Application
 
     public function registerProviders(): void
     {
-        /** @var class-string<ServiceProviderInterface> $serviceProviderClass */
+        /** @var class-string<ServiceProvider> $serviceProviderClass */
         foreach ($this->serviceProviders as $serviceProviderClass) {
             $serviceProvider = new $serviceProviderClass();
             $serviceProvider->register($this->container);

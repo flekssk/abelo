@@ -3,7 +3,7 @@
 namespace App\Application\CQRS\Concrete;
 
 /**
- * @method asController()
+ * @method asHtml()
  */
 trait AsHtml
 {

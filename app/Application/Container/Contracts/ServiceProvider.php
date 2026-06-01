@@ -6,7 +6,7 @@ namespace App\Application\Container\Contracts;
 
 use App\Application\Container\Container;
 
-class ServiceProviderInterface
+class ServiceProvider
 {
     public function register(Container $container): void
     {
